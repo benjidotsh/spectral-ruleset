@@ -322,17 +322,17 @@ rules:
   #     field: example
   #     function: truthy
 
-  # must-use-standard-formats-for-date-and-time-properties-utc:
-  #   message: "You should UTC for {{property}}"
-  #   description: MUST use standard formats for date and time properties [169]
-  #   documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#169
-  #   severity: warn # Not an error as you only should provide an example to help your consumers
-  #   given: $.paths..[?(@.type === 'string' && @.format === 'date-time')]
-  #   then:
-  #     field: example
-  #     function: pattern
-  #     functionOptions:
-  #       match: "Z$"
+  must-use-standard-formats-for-date-and-time-properties-utc:
+    message: 'You should UTC for {{property}}'
+    description: MUST use standard formats for date and time properties [169]
+    documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#169
+    severity: warn # Not an error as you only should provide an example to help your consumers
+    given: $.paths..[?(@.type === 'string' && @.format === 'date-time')]
+    then:
+      field: example
+      function: pattern
+      functionOptions:
+        match: 'Z$'
 
   # must-use-problem-json-as-default-response:
   #   message: Operation must use problem json as default response
