@@ -16,124 +16,124 @@ rules:
   # MUST always return JSON objects as top-level data structures [110]
   # => https://opensource.zalando.com/restful-api-guidelines/#110
 
-  must-always-return-json-objects-as-top-level-data-structures:
-    message: 'Top-level data structure must be an object'
-    description: MUST always return JSON objects as top-level data structures [110]
-    documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#110
-    severity: error
-    given: $.paths.*.*[responses,requestBody]..content..schema
-    then:
-      function: is-object-schema
+  # must-always-return-json-objects-as-top-level-data-structures:
+  #   message: 'Top-level data structure must be an object'
+  #   description: MUST always return JSON objects as top-level data structures [110]
+  #   documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#110
+  #   severity: error
+  #   given: $.paths.*.*[responses,requestBody]..content..schema
+  #   then:
+  #     function: is-object-schema
 
   # SHOULD used open-ended list of values (x-extensible-enum) for enumerations [112]
   # => https://opensource.zalando.com/restful-api-guidelines/#112
 
-  should-use-x-extensible-enum:
-    message: 'Should use `x-extensible-enum` instead of `enum`'
-    description: SHOULD used open-ended list of values (x-extensible-enum) for enumerations [112]
-    documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#112
-    severity: warn
-    given: $.paths..[?(@ && @.type=='string')].enum
-    then:
-      function: undefined
+  # should-use-x-extensible-enum:
+  #   message: 'Should use `x-extensible-enum` instead of `enum`'
+  #   description: SHOULD used open-ended list of values (x-extensible-enum) for enumerations [112]
+  #   documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#112
+  #   severity: warn
+  #   given: $.paths..[?(@ && @.type=='string')].enum
+  #   then:
+  #     function: undefined
 
   # MUST not use URI versioning [115]
   # => https://opensource.zalando.com/restful-api-guidelines/#115
 
-  must-not-use-uri-versioning:
-    message: Path must not contain versioning
-    description: MUST not use URI versioning [115]
-    documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#115
-    severity: error
-    given: $.paths.*~
-    then:
-      function: pattern
-      functionOptions:
-        notMatch: /v[0-9]+/
+  # must-not-use-uri-versioning:
+  #   message: Path must not contain versioning
+  #   description: MUST not use URI versioning [115]
+  #   documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#115
+  #   severity: error
+  #   given: $.paths.*~
+  #   then:
+  #     function: pattern
+  #     functionOptions:
+  #       notMatch: /v[0-9]+/
 
   # MUST use semantic versioning [116]
   # => https://opensource.zalando.com/restful-api-guidelines/#116
 
-  must-use-semantic-versioning:
-    message: '{{error}}'
-    description: MUST use semantic versioning [116]
-    documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#116
-    severity: error
-    given: $.info.version
-    then:
-      function: schema
-      functionOptions:
-        schema:
-          type: string
-          pattern: '^[0-9]+\.[0-9]+\.[0-9]+(-[0-9a-zA-Z-]+(\.[0-9a-zA-Z-]+)*)?$'
+  # must-use-semantic-versioning:
+  #   message: '{{error}}'
+  #   description: MUST use semantic versioning [116]
+  #   documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#116
+  #   severity: error
+  #   given: $.info.version
+  #   then:
+  #     function: schema
+  #     functionOptions:
+  #       schema:
+  #         type: string
+  #         pattern: '^[0-9]+\.[0-9]+\.[0-9]+(-[0-9a-zA-Z-]+(\.[0-9a-zA-Z-]+)*)?$'
 
   # MUST property names must be ASCII snake_case [118]
   # => https://opensource.zalando.com/restful-api-guidelines/#118
 
-  must-use-snake-case-for-property-names:
-    message: Property name has to be ASCII snake_case
-    description: MUST property names must be ASCII snake_case [118]
-    documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#118
-    severity: error
-    given: $.paths.*.*[responses,requestBody]..content..schema..properties.*~
-    then:
-      function: pattern
-      functionOptions:
-        match: ^[a-z_][a-z_0-9]*$
+  # must-use-snake-case-for-property-names:
+  #   message: Property name has to be ASCII snake_case
+  #   description: MUST property names must be ASCII snake_case [118]
+  #   documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#118
+  #   severity: error
+  #   given: $.paths.*.*[responses,requestBody]..content..schema..properties.*~
+  #   then:
+  #     function: pattern
+  #     functionOptions:
+  #       match: ^[a-z_][a-z_0-9]*$
 
   # MUST use lowercase separate words with hyphens for path segments [129]
   # => https://opensource.zalando.com/restful-api-guidelines/#129
 
-  must-use-lowercase-with-hypens-for-path-segements:
-    message: Path segments have to be lowercase separate words with hyphens
-    description: MUST use lowercase separate words with hyphens for path segments [129]
-    documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#129
-    severity: error
-    given: $.paths.*~
-    then:
-      function: pattern
-      functionOptions:
-        match: ^(?=((([\/a-z][a-z0-9\-\/]*)?({[^}]*})?)+))\1$
+  # must-use-lowercase-with-hypens-for-path-segements:
+  #   message: Path segments have to be lowercase separate words with hyphens
+  #   description: MUST use lowercase separate words with hyphens for path segments [129]
+  #   documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#129
+  #   severity: error
+  #   given: $.paths.*~
+  #   then:
+  #     function: pattern
+  #     functionOptions:
+  #       match: ^(?=((([\/a-z][a-z0-9\-\/]*)?({[^}]*})?)+))\1$
 
   # MUST use snake_case (never camelCase) for query parameters [130]
   # => https://opensource.zalando.com/restful-api-guidelines/#130
 
-  must-use-snake-case-for-query-parameters:
-    message: Query parameters must be snake_case
-    description: MUST use snake_case (never camelCase) for query parameters [130]
-    documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#130
-    severity: error
-    given: $.paths.*.*.parameters[?(@ && @.in=='query')].name
-    then:
-      function: pattern
-      functionOptions:
-        match: ^[a-z][_a-z0-9]*$
+  # must-use-snake-case-for-query-parameters:
+  #   message: Query parameters must be snake_case
+  #   description: MUST use snake_case (never camelCase) for query parameters [130]
+  #   documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#130
+  #   severity: error
+  #   given: $.paths.*.*.parameters[?(@ && @.in=='query')].name
+  #   then:
+  #     function: pattern
+  #     functionOptions:
+  #       match: ^[a-z][_a-z0-9]*$
 
   # SHOULD prefer hyphenated-pascal-case for HTTP header fields [132]
   # => https://opensource.zalando.com/restful-api-guidelines/#132
 
-  should-use-hyphenated-pascal-case-for-header-parameters:
-    message: Header parameters should be Hyphenated-Pascal-Case
-    description: SHOULD prefer hyphenated-pascal-case for HTTP header fields [132]
-    documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#132
-    severity: warn
-    given: $.paths..parameters[?(@ && @.in=='header')].name
-    then:
-      function: rule-132
+  # should-use-hyphenated-pascal-case-for-header-parameters:
+  #   message: Header parameters should be Hyphenated-Pascal-Case
+  #   description: SHOULD prefer hyphenated-pascal-case for HTTP header fields [132]
+  #   documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#132
+  #   severity: warn
+  #   given: $.paths..parameters[?(@ && @.in=='header')].name
+  #   then:
+  #     function: rule-132
 
   # SHOULD not use /api as base path [135]
   # => https://opensource.zalando.com/restful-api-guidelines/#135
 
-  should-not-use-api-as-base-path:
-    message: Path should not start with /api
-    description: SHOULD not use /api as base path [135]
-    documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#135
-    severity: warn
-    given: $.paths.*~
-    then:
-      function: pattern
-      functionOptions:
-        notMatch: ^/api
+  # should-not-use-api-as-base-path:
+  #   message: Path should not start with /api
+  #   description: SHOULD not use /api as base path [135]
+  #   documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#135
+  #   severity: warn
+  #   given: $.paths.*~
+  #   then:
+  #     function: pattern
+  #     functionOptions:
+  #       notMatch: ^/api
 
   # MUST use normalized paths without empty path segments and trailing slashes [136]
   # => https://opensource.zalando.com/restful-api-guidelines/#136
@@ -163,30 +163,30 @@ rules:
   # SHOULD limit number of resource types [146]
   # => https://opensource.zalando.com/restful-api-guidelines/#146
 
-  should-limit-number-of-resource-types:
-    message: '{{error}}'
-    description: SHOULD limit number of resource types [146]
-    documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#146
-    severity: warn
-    given: $.paths
-    then:
-      function: count-resource-types
-      functionOptions:
-        max: 8
+  # should-limit-number-of-resource-types:
+  #   message: '{{error}}'
+  #   description: SHOULD limit number of resource types [146]
+  #   documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#146
+  #   severity: warn
+  #   given: $.paths
+  #   then:
+  #     function: count-resource-types
+  #     functionOptions:
+  #       max: 8
 
   # SHOULD limit number of sub-resource levels [147]
   # => https://opensource.zalando.com/restful-api-guidelines/#147
 
-  should-limit-number-of-sub-resource-levels:
-    message: Sub-resource levels should by <= 3
-    description: SHOULD limit number of sub-resource levels [147]
-    documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#147
-    severity: warn
-    given: $.paths.*~
-    then:
-      function: pattern
-      functionOptions:
-        match: ^\/[^\/]*((\/{[^}]*})*\/[^\/]*(\/{[^}]*})*){0,3}\/?$
+  # should-limit-number-of-sub-resource-levels:
+  #   message: Sub-resource levels should by <= 3
+  #   description: SHOULD limit number of sub-resource levels [147]
+  #   documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#147
+  #   severity: warn
+  #   given: $.paths.*~
+  #   then:
+  #     function: pattern
+  #     functionOptions:
+  #       match: ^\/[^\/]*((\/{[^}]*})*\/[^\/]*(\/{[^}]*})*){0,3}\/?$
 
   # MUST use standard HTTP status codes [150]
   # => https://opensource.zalando.com/restful-api-guidelines/#150
@@ -312,69 +312,69 @@ rules:
   # MUST use standard formats for date and time properties [169]
   # => https://opensource.zalando.com/restful-api-guidelines/#169
 
-  must-use-standard-formats-for-date-and-time-properties-example:
-    message: "You should provide an example for {{property}}"
-    description: MUST use standard formats for date and time properties [169]
-    documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#169
-    severity: warn # Not an error as you only should provide an example to help your consumers
-    given: $.paths..[?(@.type === 'string' && (@.format === 'date-time' || @.format === 'date' || @.format === 'time' || @.format === 'duration' || @.format === 'period'))]
-    then:
-      field: example
-      function: truthy
+  # must-use-standard-formats-for-date-and-time-properties-example:
+  #   message: "You should provide an example for {{property}}"
+  #   description: MUST use standard formats for date and time properties [169]
+  #   documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#169
+  #   severity: warn # Not an error as you only should provide an example to help your consumers
+  #   given: $.paths..[?(@.type === 'string' && (@.format === 'date-time' || @.format === 'date' || @.format === 'time' || @.format === 'duration' || @.format === 'period'))]
+  #   then:
+  #     field: example
+  #     function: truthy
 
-  must-use-standard-formats-for-date-and-time-properties-utc:
-    message: "You should UTC for {{property}}"
-    description: MUST use standard formats for date and time properties [169]
-    documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#169
-    severity: warn # Not an error as you only should provide an example to help your consumers
-    given: $.paths..[?(@.type === 'string' && @.format === 'date-time')]
-    then:
-      field: example
-      function: pattern
-      functionOptions:
-        match: "Z$"
+  # must-use-standard-formats-for-date-and-time-properties-utc:
+  #   message: "You should UTC for {{property}}"
+  #   description: MUST use standard formats for date and time properties [169]
+  #   documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#169
+  #   severity: warn # Not an error as you only should provide an example to help your consumers
+  #   given: $.paths..[?(@.type === 'string' && @.format === 'date-time')]
+  #   then:
+  #     field: example
+  #     function: pattern
+  #     functionOptions:
+  #       match: "Z$"
 
-  must-use-problem-json-as-default-response:
-    message: Operation must use problem json as default response
-    description: MUST specify success and error responses [151]
-    documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#151
-    severity: error
-    given: $.paths.*.*.responses.default
-    then:
-      field: content.application/problem+json
-      function: truthy
+  # must-use-problem-json-as-default-response:
+  #   message: Operation must use problem json as default response
+  #   description: MUST specify success and error responses [151]
+  #   documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#151
+  #   severity: error
+  #   given: $.paths.*.*.responses.default
+  #   then:
+  #     field: content.application/problem+json
+  #     function: truthy
 
   # MUST define a format for number and integer types [171]
   # => https://opensource.zalando.com/restful-api-guidelines/#171
   # => list of valid types https://github.com/zalando/zally/blob/main/server/zally-ruleset-zalando/src/main/resources/reference.conf#L92-L97
 
-  must-define-a-format-for-number-types:
-    message: Numeric properties must have valid format specified
-    description: MUST define a format for number and integer types [171]
-    documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#171
-    severity: error
-    given: $.paths.*.*..schema..properties..[?(@ && @.type=='number')]
-    then:
-      - field: format
-        function: defined
-      - field: format
-        function: pattern
-        functionOptions:
-          match: ^(float|double|decimal)$
+  # must-define-a-format-for-number-types:
+  #   message: Numeric properties must have valid format specified
+  #   description: MUST define a format for number and integer types [171]
+  #   documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#171
+  #   severity: error
+  #   given: $.paths.*.*..schema..properties..[?(@ && @.type=='number')]
+  #   then:
+  #     - field: format
+  #       function: defined
+  #     - field: format
+  #       function: pattern
+  #       functionOptions:
+  #         match: ^(float|double|decimal)$
 
-  must-define-a-format-for-integer-types:
-    message: Numeric properties must have valid format specified
-    description: MUST define a format for number and integer types [171]
-    documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#171
-    severity: error
-    given: $.paths.*.*..schema..properties..[?(@ && @.type=='integer')]
-    then:
-      - field: format
-        function: defined
-      - field: format
-        function: pattern
-        functionOptions:
-          match: ^(int32|int64|bigint)$
+  # must-define-a-format-for-integer-types:
+  #   message: Numeric properties must have valid format specified
+  #   description: MUST define a format for number and integer types [171]
+  #   documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#171
+  #   severity: error
+  #   given: $.paths.*.*..schema..properties..[?(@ && @.type=='integer')]
+  #   then:
+  #     - field: format
+  #       function: defined
+  #     - field: format
+  #       function: pattern
+  #       functionOptions:
+  #         match: ^(int32|int64|bigint)$
 
   # SHOULD prefer standard media type name application/json [172]
   # => https://opensource.zalando.com/restful-api-guidelines/#172
@@ -393,111 +393,111 @@ rules:
   # MUST support problem JSON [176]
   # => https://opensource.zalando.com/restful-api-guidelines/#176
 
-  must-use-problem-json-for-errors:
-    message: Error response must be application/problem+json
-    description: MUST support problem JSON [176]
-    documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#176
-    severity: error
-    given: $.paths.*.*.responses[?(@ && @property.match(/^(4|5)/))]
-    then:
-      field: content.application/problem+json
-      function: truthy
+  # must-use-problem-json-for-errors:
+  #   message: Error response must be application/problem+json
+  #   description: MUST support problem JSON [176]
+  #   documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#176
+  #   severity: error
+  #   given: $.paths.*.*.responses[?(@ && @property.match(/^(4|5)/))]
+  #   then:
+  #     field: content.application/problem+json
+  #     function: truthy
 
-  must-use-valid-problem-json-schema:
-    message: '{{error}}'
-    description: MUST support problem JSON [176]
-    documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#176
-    severity: error
-    given: $.paths.*.*.responses.*.content.application/problem+json
-    then:
-      field: schema
-      function: is-problem-json-schema
+  # must-use-valid-problem-json-schema:
+  #   message: '{{error}}'
+  #   description: MUST support problem JSON [176]
+  #   documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#176
+  #   severity: error
+  #   given: $.paths.*.*.responses.*.content.application/problem+json
+  #   then:
+  #     field: schema
+  #     function: is-problem-json-schema
 
   # MUST provide API identifiers [215]
   # => https://opensource.zalando.com/restful-api-guidelines/#215
 
-  must-provide-api-identifiers:
-    message: '{{error}}'
-    description: MUST provide API identifiers [215]
-    documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#215
-    severity: error
-    given: $.info.x-api-id
-    then:
-      function: schema
-      functionOptions:
-        schema:
-          type: string
-          pattern: ^[a-z0-9][a-z0-9-:.]{6,62}[a-z0-9]$
+  # must-provide-api-identifiers:
+  #   message: '{{error}}'
+  #   description: MUST provide API identifiers [215]
+  #   documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#215
+  #   severity: error
+  #   given: $.info.x-api-id
+  #   then:
+  #     function: schema
+  #     functionOptions:
+  #       schema:
+  #         type: string
+  #         pattern: ^[a-z0-9][a-z0-9-:.]{6,62}[a-z0-9]$
 
   # MUST contain API meta information [218]
   # https://opensource.zalando.com/restful-api-guidelines/#218
 
-  must-have-info-description:
-    message: Missing `info.description`.
-    description: MUST contain API meta information [218]
-    documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#218
-    severity: error
-    given: $.info
-    then:
-      field: description
-      function: truthy
+  # must-have-info-description:
+  #   message: Missing `info.description`.
+  #   description: MUST contain API meta information [218]
+  #   documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#218
+  #   severity: error
+  #   given: $.info
+  #   then:
+  #     field: description
+  #     function: truthy
 
-  must-have-info-contact-name:
-    message: Missing `info.contact.name`.
-    description: MUST contain API meta information [218]
-    documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#218
-    severity: error
-    given: $.info
-    then:
-      field: contact.name
-      function: truthy
+  # must-have-info-contact-name:
+  #   message: Missing `info.contact.name`.
+  #   description: MUST contain API meta information [218]
+  #   documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#218
+  #   severity: error
+  #   given: $.info
+  #   then:
+  #     field: contact.name
+  #     function: truthy
 
-  must-have-info-contact-url:
-    message: Missing `info.contact.url`.
-    description: MUST contain API meta information [218]
-    documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#218
-    severity: error
-    given: $.info
-    then:
-      field: contact.url
-      function: truthy
+  # must-have-info-contact-url:
+  #   message: Missing `info.contact.url`.
+  #   description: MUST contain API meta information [218]
+  #   documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#218
+  #   severity: error
+  #   given: $.info
+  #   then:
+  #     field: contact.url
+  #     function: truthy
 
-  must-have-info-contact-email:
-    message: Missing `info.contact.email`.
-    description: MUST contain API meta information [218]
-    documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#218
-    severity: error
-    given: $.info
-    then:
-      field: contact.email
-      function: truthy
+  # must-have-info-contact-email:
+  #   message: Missing `info.contact.email`.
+  #   description: MUST contain API meta information [218]
+  #   documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#218
+  #   severity: error
+  #   given: $.info
+  #   then:
+  #     field: contact.email
+  #     function: truthy
 
-  must-have-info-x-api-id:
-    message: Missing `info.x-api-id`.
-    description: MUST contain API meta information [218]
-    documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#218
-    severity: error
-    given: $.info
-    then:
-      field: x-api-id
-      function: truthy
+  # must-have-info-x-api-id:
+  #   message: Missing `info.x-api-id`.
+  #   description: MUST contain API meta information [218]
+  #   documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#218
+  #   severity: error
+  #   given: $.info
+  #   then:
+  #     field: x-api-id
+  #     function: truthy
 
   # MUST provide API audience [219]
   # => https://opensource.zalando.com/restful-api-guidelines/#219
 
-  must-provide-api-audience:
-    message: Missing or wrong `info.x-audience`.
-    description: MUST provide API audience [219]
-    documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#219
-    severity: error
-    given: $.info
-    then:
-      - field: x-audience
-        function: truthy
-      - field: x-audience
-        function: pattern
-        functionOptions:
-          match: ^(component-internal|business-unit-internal|company-internal|external-partner|external-public)$
+  # must-provide-api-audience:
+  #   message: Missing or wrong `info.x-audience`.
+  #   description: MUST provide API audience [219]
+  #   documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#219
+  #   severity: error
+  #   given: $.info
+  #   then:
+  #     - field: x-audience
+  #       function: truthy
+  #     - field: x-audience
+  #       function: pattern
+  #       functionOptions:
+  #         match: ^(component-internal|business-unit-internal|company-internal|external-partner|external-public)$
 
   # SHOULD declare enum values using UPPER_SNAKE_CASE format [240]
   # => https://opensource.zalando.com/restful-api-guidelines/#240
